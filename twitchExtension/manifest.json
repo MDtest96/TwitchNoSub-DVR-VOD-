@@ -1,0 +1,44 @@
+{
+    "name": "TwitchNoSub + DVR",
+    "version": "1.0.0",
+    "description": "Watch sub-only VODs and rewind live streams with DVR functionality",
+    "manifest_version": 3,
+    "icons": {
+        "128": "assets/icons/icon.png"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "src/app.js",
+                "src/chrome/app.js",
+                "src/dvr/dvr-tracker.js",
+                "src/dvr/dvr-ui.js",
+                "src/dvr/dvr-controller.js",
+                "src/dvr/dvr-inject.js"
+            ],
+            "matches": [
+                "https://*.twitch.tv/*"
+            ]
+        }
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.twitch.tv/*"
+            ],
+            "js": [
+                "src/restriction-remover.js",
+                "src/twitchnosub.js",
+                "src/dvr-loader.js"
+            ],
+            "all_frames": true,
+            "run_at": "document_start"
+        }
+    ],
+    "host_permissions": [
+        "https://*.twitch.tv/*",
+        "https://static.twitchcdn.net/assets/*",
+        "https://gql.twitch.tv/*"
+    ],
+    "permissions": []
+}
